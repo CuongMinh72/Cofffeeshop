@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const port = 3000;
+app.use(express.json());
 
 require('dotenv/config');
 
@@ -16,6 +17,7 @@ app.get(api+'/products', (req, res) =>{
 });
 
 app.post(api+'/products', (req, res) =>{
+    app.use(express.json());
     const newProduct = req.body;
     console.log(newProduct);
     res.send(newProduct);
