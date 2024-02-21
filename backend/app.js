@@ -4,8 +4,21 @@ const port = 3000;
 
 require('dotenv/config');
 
-app.get('/', (req, res) => {
-    res.send('Welcome to the Coffee Shop!');
+const api = process.env.API_URL;
+
+app.get(api+'/products', (req, res) =>{
+    const product = {
+        id: 1,
+        name: 'Coffee',
+        image: 'some_image',
+    };
+    res.send(product);
+});
+
+app.post(api+'/products', (req, res) =>{
+    const newProduct = req.body;
+    console.log(newProduct);
+    res.send(newProduct);
 });
 
 app.listen(port, () => {
