@@ -4,16 +4,24 @@ const port = 3000;
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-const api = '/api/v1';
 dotenv.config();
-const productRouter = require('./routers/products');
 
 //middleware
 app.use(express.json());
 app.use(morgan('tiny'));
 
 //routes
+const productRouter = require('./routers/products');
+const categoryRouter = require('./routers/category');
+const userRouter = require('./routers/user');
+const orderRouter = require('./routers/order');
+
+const api = process.env.API_URL;
+
 app.use(api+'/products', productRouter);
+app.use(api+'/category', categoryRouter);
+app.use(api+'/users', userRouter);
+app.use(api+'/orders', orderRouter);
 
 //database
 mongoose.connect(process.env.CONNECTION_STRING, {
